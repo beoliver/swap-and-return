@@ -2,6 +2,8 @@
 
 A very simple library (well, it's just a function) for updating atoms and returning values
 
+[![Clojars Project](https://img.shields.io/clojars/v/beoliver/swap-and-return.svg)](https://clojars.org/beoliver/swap-and-return)
+
 ## Usage
 
 ```clojure
