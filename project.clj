@@ -1,4 +1,4 @@
-(defproject swap-and-return "0.1.0-SNAPSHOT"
+(defproject swap-and-return "0.1.0"
   :description "A simple library for updating atoms and retrning values"
   :url "https://github.com/beoliver/swap-and-return"
   :license {:name "Eclipse Public License"
