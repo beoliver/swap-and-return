@@ -6,7 +6,7 @@ A very simple library (well, it's just a function) for updating atoms and return
 
 ```clojure
 (ns thread-safe-queues.core
-  (:require [swap-and-return.core :refer :all]))
+  (:require [swap-and-return.core :as s]))
 
 (defn queue [& elems]
   (atom (into [] elems)))
@@ -18,7 +18,7 @@ A very simple library (well, it's just a function) for updating atoms and return
 ;; for the pop operation we want to return the popped value to the calling thread
 
 (def pop!!
-  (partial swap-and-return!
+  (partial s/swap-and-return!
            empty? ; test if the underlying vector is empty
            (fn [xs] {:atom (subvec xs 1) ; the new value for the atom
                      :user (first xs)} ; the value to return
