@@ -21,34 +21,28 @@ A very simple library (well, it's just a function) for updating atoms and return
 
 (def pop!!
   (partial s/swap-and-return!
-           empty? ; test if the underlying vector is empty
-           (fn [xs] {:atom (subvec xs 1) ; the new value for the atom
-                     :user (first xs)} ; the value to return
-		     )))
+           empty?
+           (fn [xs] {::s/atom (subvec xs 1)
+                     :val (first xs)
+                     :some-key "some other data"})))
 
 (def q (apply queue [1 2 3 4]))
 
 > (pop!! q)
-{:value 1}
+{:val 1, :some-key "some other data"}
 > (pop!! q)
-{:value 2}
-> (push!! q "hello")
+{:val 2, :some-key "some other data"}
+> (pop!! q)
+{:val 3, :some-key "some other data"}
+> (pop!! q)
+{:val 4, :some-key "some other data"}
+> (pop!! q)
+nil
+> (push!! q 5)
 true
 > (pop!! q)
-{:value 3}
+{:val 5, :some-key "some other data"}
 > (pop!! q)
-{:value 4}
-> (pop!! q)
-{:value "hello"}
-> (pop!! q)
-{:empty true}
-> (pop!! q)
-{:empty true}
-> (push!! q nil)
-true
-> (pop!! q)
-{:value nil}
-> (pop!! q)
-{:empty true}
->
+nil
+
 ```
