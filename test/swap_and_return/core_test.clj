@@ -1,6 +1,6 @@
 (ns swap-and-return.core-test
   (:require [clojure.test :refer :all]
-            [swap-and-return.core :refer :all]))
+            [swap-and-return.core :as s]))
 
 (defn queue [& elems]
   (atom (into [] elems)))
@@ -10,9 +10,10 @@
   (swap! queue conj val) true)
 
 (def pop!!
-  (partial swap-and-return!
+  (partial s/swap-and-return!
            empty?
-           (fn [xs] {:atom (subvec xs 1)
-                     :user (first xs)})))
+           (fn [xs] {::s/atom (subvec xs 1)
+                     :val (first xs)
+                     :some-key "some other data"})))
 
 (def q (apply queue [1 2 3 4]))
